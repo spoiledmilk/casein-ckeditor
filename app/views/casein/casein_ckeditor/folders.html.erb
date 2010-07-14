@@ -1,0 +1,5 @@
+<ul class="jqueryFileTree" style="display: none;">
+	<% @folders.each do |folder| %>
+		<li class="directory collapsed"><a href="#" rel="<%= folder.id %>/"><%= folder.folder_name %></a></li>
+	<% end %>
+</ul>
