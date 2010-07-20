@@ -10,7 +10,7 @@ Install
 
 * configure paperclip gem
 * rails plugin install git://github.com/spoiledmilk/casein-ckeditor.git
-* rake casein:ckeditor:setup
+* rake casein:ckeditor:setup (or rake casein:ckeditor:setup MIGRATION=false if you don't want the migration)
 * rake db:migrate
 * add <%= javascript_include_tag :caseinck %> to casein_main.html.erb
 
