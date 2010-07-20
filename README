@@ -13,6 +13,7 @@ Install
 * rake casein:ckeditor:setup (or rake casein:ckeditor:setup MIGRATION=false if you don't want the migration)
 * rake db:migrate
 * add <%= javascript_include_tag :caseinck %> to casein_main.html.erb
+* if you defined your own paperclip styles, you can use them in the different editors with passing a :paperclip_style option to the casein_ckeditor_area helper
 
 
 Copyright (c) 2010 Spoiled Milk ApS, released under the MIT license

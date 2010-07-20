@@ -5,6 +5,9 @@ module CaseinCkeditor
   mattr_accessor :editor_toolbar
   @@editor_toolbar = "CaseinCk_Basic"
   
+  mattr_accessor :paperclip_styles
+  @@paperclip_styles = {}
+  
   def self.setup
     yield self
   end

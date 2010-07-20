@@ -53,12 +53,12 @@ class Casein::CaseinCkeditorController < Casein::CaseinController
     else
       dimensions = Paperclip::Geometry.from_file(@media_file.upload.path)
       render :json, :text => {
-        'Path' => @media_file.upload.url,
+        'Path' => @media_file.upload.url(params[:style]),
         'ID' => @media_file.id,
         'Parent ID' => (@media_file.parent.id rescue ''),
         'Filename' => @media_file.upload_file_name,
         'File Type' => @media_file.upload_file_name.split('.').last,
-        'Preview' => (@media_file.image?) ? @media_file.upload.url : "/javascripts/caseinckeditor/filemanager/images/fileicons/#{@media_file.upload_file_name.split('.').last}.png",
+        'Preview' => (@media_file.image?) ? @media_file.upload.url(params[:style]) : "/javascripts/caseinckeditor/filemanager/images/fileicons/#{@media_file.upload_file_name.split('.').last}.png",
         'Properties' => {
           'Date Created' => @media_file.created_at.strftime('%d.%m.%Y'),
   		    'Date Modified' => @media_file.updated_at.strftime('%d.%m.%Y'),
@@ -124,7 +124,7 @@ class Casein::CaseinCkeditorController < Casein::CaseinController
           'Path' => "/#{child.id}",
           'Filename' => child.upload_file_name,
           'File Type' => child.upload_file_name.split('.').last,
-          'Preview' => (child.image?) ? child.upload.url : "/javascripts/caseinckeditor/filemanager/images/fileicons/#{child.upload_file_name.split('.').last}.png",
+          'Preview' => (child.image?) ? child.upload.url(:ckeditor_thumb) : "/javascripts/caseinckeditor/filemanager/images/fileicons/#{child.upload_file_name.split('.').last}.png",
           'Properties' => {
             'Date Created' => nil,
 				    'Date Modified' => nil,
