@@ -3,22 +3,22 @@ module CaseinCkeditorHelper
 	def casein_ckeditor_area form, model, attribute, options = {}
 	  id = "#{model.class.name.downcase}_#{attribute}_#{rand(999999)}"
 	  output = casein_text_area(form, model, attribute, options.merge({:id => id}))
-	  output + casein_ckeditor_js_code(id, '120px', options[:paperclip_style])
+	  output + casein_ckeditor_js_code(id, '120px', options)
   end
   
   def casein_ckeditor_area_big form, model, attribute, options = {}
 	  id = "#{model.class.name.downcase}_#{attribute}_#{rand(999999)}"
 	  output = casein_text_area(form, model, attribute, options.merge({:id => id}))
-	  output + casein_ckeditor_js_code(id, '300px', options[:paperclip_style])
+	  output + casein_ckeditor_js_code(id, '300px', options)
   end
   
-  def casein_ckeditor_js_code(id, height, style)
+  def casein_ckeditor_js_code(id, height, options = {})
     ckeditor_options = {:width => '100%', :height => height }
-    ckeditor_options[:toolbar]  = CaseinCkeditor.editor_toolbar
+    ckeditor_options[:toolbar]  = options[:ckeditor_toolbar] || CaseinCkeditor.editor_toolbar
     ckeditor_options[:customConfig] = '/javascripts/'+CaseinCkeditor.editor_config
     
-    ckeditor_options[:filebrowserBrowseUrl] = '/casein/ckeditor/filebrowser?style='+(style||"original")
-    ckeditor_options[:filebrowserImageBrowseUrl] = '/casein/ckeditor/imagebrowser?style='+(style||"original")
+    ckeditor_options[:filebrowserBrowseUrl] = '/casein/ckeditor/filebrowser?style='+(options[:paperclip_style]||"original")
+    ckeditor_options[:filebrowserImageBrowseUrl] = '/casein/ckeditor/imagebrowser?style='+(options[:paperclip_style]||"original")
     
     javascript_tag("
       if (CKEDITOR.instances['#{id}']) { 

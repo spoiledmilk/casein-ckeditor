@@ -1,6 +1,6 @@
 module CaseinCkeditor
   mattr_accessor :editor_config
-  @@editor_config = "caseinck/config.js"
+  @@editor_config = "caseinckeditor/config.js"
   
   mattr_accessor :editor_toolbar
   @@editor_toolbar = "CaseinCk_Basic"
@@ -13,4 +13,4 @@ module CaseinCkeditor
   end
 end
 
-ActionView::Helpers::AssetTagHelper.register_javascript_expansion :caseinck => ["caseinckeditor/ckeditor/ckeditor", "caseinckeditor/config.js"]
+ActionView::Helpers::AssetTagHelper.register_javascript_expansion :caseinck => ["caseinckeditor/ckeditor/ckeditor"]
