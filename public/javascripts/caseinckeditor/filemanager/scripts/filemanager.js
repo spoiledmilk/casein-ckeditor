@@ -38,7 +38,11 @@ var setUploader = function(path){
 
 			if(fname != ''){
 				foldername = fname;
-
+				
+				if($('#filetree li.directory.expanded').length == 0) {
+					$('#currentpath').val('/');
+				}
+				
 				$.getJSON(fileConnector + '?mode=addfolder&path=' + $('#currentpath').val() + '&name=' + foldername, function(result){
 					if(result['Code'] == 0){
 						addFolder(result['Parent'], result['Name'], result['Folder ID']);
