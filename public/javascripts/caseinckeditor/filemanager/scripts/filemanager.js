@@ -198,7 +198,10 @@ var deleteItem = function(data){
 	
 	var doDelete = function(v, m){
 		if(v != 1) return false;	
-		var connectString = fileConnector + '?mode=delete&path=' + data['Parent ID'] + '/' + data['ID'];
+		if(data['File Type'] == 'dir')
+			var connectString = fileConnector + '?mode=delete&path=' + data['Path'];
+		else
+			var connectString = fileConnector + '?mode=delete&path=' + data['Parent ID'] + '/' + data['ID'];
 	
 		$.ajax({
 			type: 'GET',
@@ -313,7 +316,7 @@ var getDetailView = function(path){
 
 // Binds contextual menus to items in list and grid views.
 var setMenus = function(action, path){
-	$.getJSON(fileConnector + '?mode=getinfo&style=' + $.urlParam('style') + '&path=' + path, function(data){
+	$.getJSON(fileConnector + '?mode=getinfo&path=' + path, function(data){
 		if($('#fileinfo').data('view') == 'grid'){
 			var item = $('#fileinfo').find('img[alt="' + data['Path'] + '"]').parent();
 		} else {
@@ -358,7 +361,7 @@ var getFileInfo = function(file){
 	$('#fileinfo').html(template);
 	
 	// Retrieve the data & populate the template.
-	$.getJSON(fileConnector + '?mode=getinfo&style=' + $.urlParam('style') +'&path=' + file, function(data){
+	$.getJSON(fileConnector + '?mode=getinfo&path=' + file, function(data){
 		if(data['Code'] == 0){
 			$('#fileinfo').find('h1').text(data['Filename']);
 			$('#fileinfo').find('img').attr('src',data['Preview']);
